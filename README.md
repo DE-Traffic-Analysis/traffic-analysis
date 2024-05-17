@@ -30,33 +30,68 @@
 - 차종별 데이터
   - [고속도로 공공데이터 포털](https://data.ex.co.kr/portal/fdwn/view?type=ETC&num=30&requestfrom=dataset#)
 
+## Data Visualize / Final Dashboard Result
+### Dataset 및 차트 생성
+- deck.gl(mapbox)를 활용한 고속도로 지도 시각화
   
-# 팀원 및 역할
-
-- 김승훈: 고속도로 및 구간을 나타내는 지도 대시보드 생성
-- 김승현: 고속도로 구간별 교통량 대시보드 생성
-- 김동기: 고속도로 구간별 평균 속도 대시보드 생성
-- 남원우: 고속도로 구간별 차종의 교통량 대시보드 생성
-- 김유민: 고속도로 구간별 날씨(강수량 및 적설량) 대시보드 생성
-
-
-# 활용 기술 및 프레임워크
-
-### Language
-- Python
-- SQL
-
-### Dashboard
-- Superset
+  ![Untitled](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/6fba37e9-669a-444f-ac64-e59ab8c677a0)
   
-### DataLake
-- AWS S3
+- 시간에 따른 차량 평균 속도 시각화
+
+  ![%EA%B2%BD%EC%9D%B8%EC%84%A0-avg-spd-bar-chart](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/6fb9257b-54c5-42ea-90cf-7e77f53fa99e)
   
+- 시간에 따른 교통량 시각화
+  
+  ![%EA%B2%BD%EC%9D%B8%EC%84%A0-avg-trff-area-chart](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/278be6e4-a601-420c-92f1-5c88020b2d5f)
+
+- 시간에 따른 차량 종류별 교통량 시각화
+  
+  ![Untitled 1](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/b95d0e02-77a8-4f30-aabb-63697173793b)
+  
+- 시간에 따른 날씨(강수량-적설량) 시각화
+  
+  ![Untitled 2](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/12d95768-39f0-40be-8041-564d18453e32)
+
+### 대시보드 구성 및 필터 생성
+- 대시보드 구성
+  
+  ![Untitled 3](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/f50d9748-a034-4c6b-b223-bf0c42e5fd9c)
+- 필터
+  
+  ![Untitled 4](https://github.com/DE-Traffic-Analysis/traffic-analysis/assets/61622859/915a8deb-f5ea-4e81-bd0a-cb68631f929d)
+  
+  - highway
+    - 시각화할 고속도로의 이름을 필터링 합니다.
+  - section
+    - 고속도로 내의 IC/JC를 필터링 합니다.
+  - date
+    - 어떤 기간으로 날짜를 지정할지 필터링 합니다.
+
+## 활용 기술
+### 언어
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=PostgreSQL&logoColor=white">
+
+### 대시보드
+<img src="https://img.shields.io/badge/Superset-404040?style=flat&logo=Superset&logoColor=white">
+
+### 데이터 레이크
+<img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat&logo=Amazon S3&logoColor=white">
+
 ### 데이터 웨어하우스
-- AWS Redshift Serverless
+<img src="https://img.shields.io/badge/Amazon Redshift-8C4FFF?style=flat&logo=Amazon Redshift&logoColor=white">
 
-### 커뮤니케이션 및 협업 도구
-- Gather Town
-- Git/GitHub
-- Slack
-- Notion
+### 커뮤니케이션 & 협업
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"> <img src="https://img.shields.io/badge/Gather-2535A0?style=flat&logo=Gather&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white"> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white">
+
+# 참여자 정보
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/kdk0411"><img src="https://avatars.githubusercontent.com/u/99461483?v=4" width="100px;" alt=""/><br /><sub><b>김동기</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/zjacom"><img src="https://avatars.githubusercontent.com/u/112957047?v=4" width="100px;" alt=""/><br /><sub><b>김승훈</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Kim-2301"><img src="https://avatars.githubusercontent.com/u/84478606?v=4" width="100px;" alt=""/><br /><sub><b>김승현</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/7xxogre"><img src="https://avatars.githubusercontent.com/u/61622859?v=4" width="100px;" alt=""/><br /><sub><b>김유민</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/namjang2"><img src="https://avatars.githubusercontent.com/u/166671899?v=4" width="100px;" alt=""/><br /><sub><b>남원우</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
