@@ -1,24 +1,24 @@
 import pandas as pd
+import numpy as np
 
-highway_df = pd.read_csv('highway.csv')
-highway_df.to_parquet("highway.parquet", compression=None)
-node_df = pd.read_csv('updated_node.csv', encoding='CP949')
-node_df.to_parquet("node.parquet", compression=None)
+highway_df = pd.read_csv('highway.csv', engine='pyarrow')
+node_df = pd.read_csv('updated_node.csv', encoding='CP949', engine='pyarrow')
 
 columns = ['도로명', '구간', '이정']
 mileage_df = pd.DataFrame(columns=columns)
 
-# 해당 도로의 최대 이정을 찾는 함수
-def find_cur_node_max_mileage(road_name):
-    return highway_df[highway_df['도로명'] == road_name]['이정'].max()
+# 해당 도로의 최대 이정을 찾아서 미리 O(1)에 조회 가능한 딕셔너리 생성
+road_max_mileage = highway_df.groupby('도로명')['이정'].max().to_dict()
 
+def find_cur_node_max_mileage(road_name):
+    return road_max_mileage.get(road_name, np.nan)
 
 for index in range(len(node_df) - 1):
-    cur_node, nxt_node = node_df.loc[index], node_df.loc[index + 1]
+    cur_node, nxt_node = node_df.iloc[index], node_df.iloc[index + 1]
     cur_node_mileage, nxt_node_mileage = round(cur_node['도로이정'], 1), round(nxt_node['도로이정'], 1)
 
     cur_road_name = cur_node['도로명']
-    # 함수를 한 번 호출하여 변수에 담는 과정을 통해 여러 번 함수를 호출하지 않음
+    # 함수를 한 번만 호출하여 실행 속도 최적화
     cur_max_mileage = find_cur_node_max_mileage(cur_road_name)
 
     if pd.isnull(cur_max_mileage):
@@ -56,15 +56,15 @@ columns = ['name', 'section', 'path_json']
 df = pd.DataFrame(columns=columns)
 
 # 그룹화된 DataFrame을 미리 만들어서 반복문에서 사용
-# 그룹화된 DataFrame은 데이터를 미리 인덱싱하여 빠른 조회가 가능하고, 반복적인 필터링을 제거하여 성능을 향상시킨다.
 highway_grouped = highway_df.groupby(['도로명', '이정'])
 
 for index in range(len(mileage_df)):
-    data = mileage_df.loc[index]
+    data = mileage_df.iloc[index]
     road_name, section, mileage = data['도로명'], data['구간'], data['이정']
     coordinates = []
 
     for m in range(int(mileage[0] * 10), int(mileage[1] * 10 + 1)):
+        m /= 10
         key = (road_name, round(m, 1))
         if key in highway_grouped.groups:
             selected_rows = highway_grouped.get_group(key)
